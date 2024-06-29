@@ -1,0 +1,38 @@
+extends Control
+class_name main
+
+var ENTITIES = Entities.new()
+
+@onready var criar = $Criar
+@onready var nomeInput = $Nome
+@onready var label_erro = $labelErro
+const SHIMEJI = preload("res://scenes/shimeji/shimeji.tscn")
+
+func _ready():
+	db.createTable(ENTITIES.tableNames.jogadores, ENTITIES.jogadores)
+	
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_TRANSPARENT, true)
+	#get_viewport().transparent_bg = true
+	
+	criar.connect("button_down", _on_button_criar_clicked)
+
+func _process(delta):
+	pass
+
+func _on_button_criar_clicked():
+	if(!nomeInput.text):
+		label_erro.text = "Insira um nome por gentileza"
+		return
+	
+	var jogador = Jogador.new(nomeInput.text)
+	if(jogador.createJogador()):
+		label_erro.text = "O registro foi inserido corretamente!"
+		label_erro.add_theme_color_override("font_color", Color.DARK_GREEN)
+		nomeInput.text = ""
+		
+		var shimeji = SHIMEJI.instantiate()
+		add_child(shimeji)
+		
+	else:
+		label_erro.text = "Houve um erro ao salvar o registro :("
+		nomeInput.text = ""

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://btvrn7t6h6j2y"]
+
+[ext_resource type="Texture2D" uid="uid://ckm83rm76y56d" path="res://icon.svg" id="1_2vlnn"]
+[ext_resource type="Script" path="res://scenes/shimeji/shimeji.gd" id="1_5xirp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3iaa1"]
+size = Vector2(130, 15.5)
+
+[node name="Shimeji" type="CharacterBody2D"]
+script = ExtResource("1_5xirp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_2vlnn")
+offset = Vector2(0, -65)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_3iaa1")
+disabled = true
+
+[node name="Nome" type="Label" parent="."]
+offset_left = -64.0
+offset_top = -159.0
+offset_right = 65.0
+offset_bottom = -136.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1

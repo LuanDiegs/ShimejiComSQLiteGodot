@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://6vpeguccwt3d"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_6myh2"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6myh2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -309.0
+offset_right = 143.0
+offset_bottom = -275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Insira o nome do shimeji"
+horizontal_alignment = 1
+
+[node name="Nome" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 499.0
+offset_top = 53.0
+offset_right = 718.0
+offset_bottom = 83.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 499.0
+offset_top = 106.0
+offset_right = 717.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 20
+text = "Inserir"
