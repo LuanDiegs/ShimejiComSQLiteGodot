@@ -36,9 +36,3 @@ autostart = true
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_3iaa1")
 disabled = true
-
-[node name="RayCastRight" type="RayCast2D" parent="."]
-target_position = Vector2(84, 0)
-
-[node name="RayCastLeft" type="RayCast2D" parent="."]
-target_position = Vector2(-84, 0)

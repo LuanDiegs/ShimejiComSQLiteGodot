@@ -1,24 +1,79 @@
 extends CharacterBody2D
 class_name Shimeji
 	
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var nome = $Nome
+
+@onready var nome = $Entidade/Nome
+@onready var timer_action = $TimerAction
+@onready var ray_cast_right = $RayCastRight
+@onready var ray_cast_left = $RayCastLeft
+
+
+@export var state: Action.ACTION_ENUM
+
+
+const VELOCITY = 300;
+const JUMP_VELOCITY = -400
+
+
+var direction: int
+var isJumping: bool
+
 
 func _ready():
 	global_position.y = -200
 	global_position.x = get_viewport().size.x / 2
 	insertNameOnShimeji()
 	
-func _physics_process(delta):
-	if global_position.y <= get_viewport().size.y:
-		velocity.y += gravity * delta
+	timer_action.connect("timeout", randomizeAction)
 	
-	if global_position.y >= get_viewport().size.y:
-		velocity.y = 0
-		global_position.y = get_viewport().size.y
+	
+func _physics_process(delta):
+	gravityShimeji(delta)
+	moveShimeji()
 	
 	move_and_slide()
+
 
 func insertNameOnShimeji():
 	var name = db.getLastName()
 	nome.text = name
+
+
+func gravityShimeji(delta):
+	if global_position.y <= get_viewport().size.y:
+		velocity.y += gravity * delta
+	
+	if global_position.y >= get_viewport().size.y:
+		global_position.y = get_viewport().size.y
+		velocity.y = 0
+
+
+func randomizeAction():
+	var newAction = Action.ACTION_ENUM.values().pick_random()
+	
+	direction = 1 if randi_range(0, 100) < 50 else -1
+	isJumping = !global_position.y >= get_viewport().size.y
+	print(newAction)
+	state = newAction
+
+
+func moveShimeji():
+	match state:
+		Action.ACTION_ENUM.move:
+			print(str(ray_cast_right.global_position.x) + " - " + str(get_viewport().size.x))
+			if(ray_cast_right.global_position.x >= get_viewport().size.x or ray_cast_left.global_position.x <= 0):
+				direction = 1 if direction == -1 else -1
+				
+			velocity.x = direction * VELOCITY
+				
+		Action.ACTION_ENUM.idle:
+			velocity.x = 0
+			
+		Action.ACTION_ENUM.jump:
+			if(!isJumping):
+				isJumping = true
+				velocity.y = JUMP_VELOCITY
+				velocity.x = 0
+			

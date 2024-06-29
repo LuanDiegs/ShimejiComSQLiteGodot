@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://6vpeguccwt3d"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_6myh2"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6myh2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -143.0
+offset_right = 143.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Insira o nome do shimeji"
+horizontal_alignment = 1
+
+[node name="Nome" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -109.5
+offset_top = 45.0
+offset_right = 109.5
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="labelErro" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.5
+offset_top = -278.0
+offset_right = 148.5
+offset_bottom = -255.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.183492, 1.24839e-07, 4.21144e-08, 1)
+horizontal_alignment = 1
+
+[node name="Criar" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -229.0
+offset_right = 109.0
+offset_bottom = -193.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Inserir"
