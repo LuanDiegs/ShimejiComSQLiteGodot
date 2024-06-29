@@ -3,14 +3,14 @@ class_name main
 
 var ENTITIES = Entities.new()
 
-@onready var criar = $Criar
-@onready var nomeInput = $Nome
-@onready var label_erro = $labelErro
+@onready var criar = %criarButton
+@onready var nomeInput = %nomeInput
+@onready var label_erro = %labelErro
 const SHIMEJI = preload("res://scenes/shimeji/shimeji.tscn")
 
 func _ready():
 	db.createTable(ENTITIES.tableNames.jogadores, ENTITIES.jogadores)
-	
+	insertShimejis()
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_TRANSPARENT, true)
 	#get_viewport().transparent_bg = true
 	
@@ -36,3 +36,12 @@ func _on_button_criar_clicked():
 	else:
 		label_erro.text = "Houve um erro ao salvar o registro :("
 		nomeInput.text = ""
+		
+		
+func insertShimejis():
+	var data = db.get20FirstShimeji()
+	
+	for i in data.size():
+		var shimeji = SHIMEJI.instantiate() as Shimeji
+		shimeji.nameShimeji = data[i]
+		add_child(shimeji)

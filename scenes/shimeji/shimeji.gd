@@ -8,8 +8,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var timer_action = $TimerAction
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
-
-
+@onready var action = $Action
 @export var state: Action.ACTION_ENUM
 
 
@@ -19,11 +18,11 @@ const JUMP_VELOCITY = -400
 
 var direction: int
 var isJumping: bool
-
+var nameShimeji: String
 
 func _ready():
 	global_position.y = -200
-	global_position.x = get_viewport().size.x / 2
+	global_position.x = randi_range(0, get_viewport().size.x)
 	insertNameOnShimeji()
 	
 	timer_action.connect("timeout", randomizeAction)
@@ -37,8 +36,11 @@ func _physics_process(delta):
 
 
 func insertNameOnShimeji():
-	var name = db.getLastName()
-	nome.text = name
+	var newNameShimeji = nameShimeji
+	if(!newNameShimeji):
+		newNameShimeji = db.getLastName()
+		
+	nome.text = newNameShimeji
 
 
 func gravityShimeji(delta):
@@ -51,18 +53,16 @@ func gravityShimeji(delta):
 
 
 func randomizeAction():
-	var newAction = Action.ACTION_ENUM.values().pick_random()
+	var newAction = action.randomizeAction()
 	
 	direction = 1 if randi_range(0, 100) < 50 else -1
 	isJumping = !global_position.y >= get_viewport().size.y
-	print(newAction)
 	state = newAction
 
 
 func moveShimeji():
 	match state:
 		Action.ACTION_ENUM.move:
-			print(str(ray_cast_right.global_position.x) + " - " + str(get_viewport().size.x))
 			if(ray_cast_right.global_position.x >= get_viewport().size.x or ray_cast_left.global_position.x <= 0):
 				direction = 1 if direction == -1 else -1
 				

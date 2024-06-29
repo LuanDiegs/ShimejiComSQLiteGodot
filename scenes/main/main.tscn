@@ -11,58 +11,41 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6myh2")
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -143.0
+offset_top = 40.0
 offset_right = 143.0
-offset_bottom = 34.0
+offset_bottom = 192.0
 grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="nomeLabel" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Insira o nome do shimeji"
 horizontal_alignment = 1
 
-[node name="Nome" type="TextEdit" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -109.5
-offset_top = 45.0
-offset_right = 109.5
-offset_bottom = 80.0
-grow_horizontal = 2
+[node name="nomeInput" type="TextEdit" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+scroll_fit_content_height = true
 
-[node name="labelErro" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.5
-offset_top = -278.0
-offset_right = 148.5
-offset_bottom = -255.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="labelErro" type="Label" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_colors/font_color = Color(0.183492, 1.24839e-07, 4.21144e-08, 1)
 horizontal_alignment = 1
 
-[node name="Criar" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -109.0
-offset_top = -229.0
-offset_right = 109.0
-offset_bottom = -193.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="criarButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Inserir"

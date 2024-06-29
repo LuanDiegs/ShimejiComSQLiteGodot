@@ -36,3 +36,16 @@ func getLastName():
 		return "erro"
 		
 	return str(database.query_result[0].nome)
+
+func get20FirstShimeji():
+	var nameList: Array[String]
+	database.query("SELECT nome FROM jogadores ORDER BY ID DESC LIMIT 20")
+	
+	if(database.query_result.size() == 0):
+		return "erro"
+	
+	for i in database.query_result.size():
+		nameList.append(database.query_result[i].nome)
+			
+	print(nameList)
+	return nameList
