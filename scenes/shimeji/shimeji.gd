@@ -5,35 +5,27 @@ class_name Shimeji
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var nome = $Entidade/Nome
-@onready var timer_action = $TimerAction
+@onready var timer_change_state = $TimerChangeState
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
-@onready var action = $Action
 @onready var animations = $Animations
-@export var state: Action.ACTION_ENUM
-
+@onready var state: State = $State
 
 const VELOCITY = 300;
 const JUMP_VELOCITY = -400
 
-
-var direction: int
-var isJumping: bool
 var nameShimeji: String
 
 
 func _ready():
-	global_position.y = -200
+	global_position.y = -100
 	global_position.x = randi_range(0, get_viewport().size.x)
+	
 	insertNameOnShimeji()
-	
-	timer_action.connect("timeout", randomizeAction)
-	
+	timer_change_state.connect("timeout", randomizeState)
 	
 func _physics_process(delta):
 	gravityShimeji(delta)
-	moveShimeji()
-	
 	move_and_slide()
 
 
@@ -50,37 +42,16 @@ func gravityShimeji(delta):
 	if global_position.y <= get_viewport().size.y:
 		velocity.y += gravity * delta
 	
-	if global_position.y >= get_viewport().size.y:
+	if global_position.y > get_viewport().size.y:
 		global_position.y = get_viewport().size.y
 		velocity.y = 0
 
 
-func randomizeAction():
-	var newAction = action.randomizeAction()
+func randomizeState():
+	var randomState = state.randomizeState()
+	state.changeState(randomState)
 	
-	direction = 1 if randi_range(0, 100) < 50 else -1
-	isJumping = !global_position.y >= get_viewport().size.y
-	state = newAction
-
-
-func moveShimeji():
-	match state:
-		Action.ACTION_ENUM.move:
-			if(ray_cast_right.global_position.x >= get_viewport().size.x or ray_cast_left.global_position.x <= 0):
-				direction = 1 if direction == -1 else -1
-				
-			velocity.x = direction * VELOCITY
-				
-		Action.ACTION_ENUM.idle:
-			velocity.x = 0
-			
-		Action.ACTION_ENUM.jump:
-			if(!isJumping):
-				isJumping = true
-				velocity.y = JUMP_VELOCITY
-				velocity.x = 0
-
-
+	
 func shimejiDeath():
 	self.z_index = 100
 	velocity = Vector2(0, 0)

@@ -6,8 +6,7 @@ var ENTITIES = Entities.new()
 @onready var criar = %criarButton
 @onready var nomeInput = %nomeInput
 @onready var label_erro = %labelErro
-@onready var death_shimeji_toast = $deathShimejiToast
-@onready var animation_messages = $deathShimejiToast/animationMessages
+@onready var container_notifications = $deatShimejiNotifications/containerNotifications
 
 const SHIMEJI = preload("res://scenes/shimeji/shimeji.tscn")
 
@@ -33,7 +32,7 @@ func _on_button_criar_clicked():
 		label_erro.add_theme_color_override("font_color", Color.DARK_GREEN)
 		nomeInput.text = ""
 		
-		var shimejisInScene = get_tree().get_nodes_in_group("shimeji")		
+		var shimejisInScene = get_tree().get_nodes_in_group("shimeji")
 		if(shimejisInScene.size() == 10):
 			var shimejiToKill = randi_range(0, shimejisInScene.size() - 1)
 			shimejisInScene[shimejiToKill].shimejiDeath()
@@ -60,5 +59,6 @@ func insertShimejis():
 
 
 func displayMessage(message: String):
-	death_shimeji_toast.text = message
-	animation_messages.play("appear")
+	var toast: DeathShimejiToast  = preload("res://scenes/nodes/deathShimejiToast/death_shimeji_toast.tscn").instantiate() as DeathShimejiToast
+	toast.message = message
+	container_notifications.add_child(toast)
