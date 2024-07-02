@@ -6,6 +6,9 @@ var ENTITIES = Entities.new()
 @onready var criar = %criarButton
 @onready var nomeInput = %nomeInput
 @onready var label_erro = %labelErro
+@onready var death_shimeji_toast = $deathShimejiToast
+@onready var animation_messages = $deathShimejiToast/animationMessages
+
 const SHIMEJI = preload("res://scenes/shimeji/shimeji.tscn")
 
 func _ready():
@@ -30,6 +33,12 @@ func _on_button_criar_clicked():
 		label_erro.add_theme_color_override("font_color", Color.DARK_GREEN)
 		nomeInput.text = ""
 		
+		var shimejisInScene = get_tree().get_nodes_in_group("shimeji")		
+		if(shimejisInScene.size() == 10):
+			var shimejiToKill = randi_range(0, shimejisInScene.size() - 1)
+			shimejisInScene[shimejiToKill].shimejiDeath()
+			displayMessage("Oh não, parece que o " + str(shimejisInScene[shimejiToKill].nameShimeji) + " foi obliterado! :(")
+		
 		var shimeji = SHIMEJI.instantiate()
 		add_child(shimeji)
 		
@@ -41,7 +50,15 @@ func _on_button_criar_clicked():
 func insertShimejis():
 	var data = db.get20FirstShimeji()
 	
+	if(data is String):
+		return
+		
 	for i in data.size():
 		var shimeji = SHIMEJI.instantiate() as Shimeji
 		shimeji.nameShimeji = data[i]
 		add_child(shimeji)
+
+
+func displayMessage(message: String):
+	death_shimeji_toast.text = message
+	animation_messages.play("appear")

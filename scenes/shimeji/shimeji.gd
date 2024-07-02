@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
 @onready var action = $Action
+@onready var animations = $Animations
 @export var state: Action.ACTION_ENUM
 
 
@@ -19,6 +20,7 @@ const JUMP_VELOCITY = -400
 var direction: int
 var isJumping: bool
 var nameShimeji: String
+
 
 func _ready():
 	global_position.y = -200
@@ -39,6 +41,7 @@ func insertNameOnShimeji():
 	var newNameShimeji = nameShimeji
 	if(!newNameShimeji):
 		newNameShimeji = db.getLastName()
+		nameShimeji = newNameShimeji
 		
 	nome.text = newNameShimeji
 
@@ -76,4 +79,9 @@ func moveShimeji():
 				isJumping = true
 				velocity.y = JUMP_VELOCITY
 				velocity.x = 0
-			
+
+
+func shimejiDeath():
+	self.z_index = 100
+	velocity = Vector2(0, 0)
+	animations.play("death")
