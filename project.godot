@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 db="*res://utils/database/database.gd"
+VerySimpleTwitch="*res://addons/very-simple-twitch/twitch_node.gd"
 
 [display]
 
@@ -26,7 +27,15 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/per_pixel_transparency/allowed=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/very-simple-twitch/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[very_simple_twitch]
+
+config/client_id="wperqnhazgdk5xv4a1rkmhcndxytrv"

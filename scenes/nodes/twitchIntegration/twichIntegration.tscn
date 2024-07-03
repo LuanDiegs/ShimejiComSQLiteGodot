@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkuyq0v7nsax3"]
+
+[ext_resource type="Script" path="res://scenes/nodes/twitchIntegration/twichIntegration.gd" id="1_5schv"]
+
+[node name="ContainerTwitch" type="VBoxContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -639.0
+offset_top = -4.0
+offset_right = -223.0
+offset_bottom = 148.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+script = ExtResource("1_5schv")
+
+[node name="HContainerTwitch" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="br" type="Control" parent="HContainerTwitch"]
+layout_mode = 2
+
+[node name="VContainerTwitch" type="VBoxContainer" parent="HContainerTwitch"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="canalLabel" type="Label" parent="HContainerTwitch/VContainerTwitch"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Conecte com se canal na Twitch!"
+horizontal_alignment = 1
+
+[node name="canalInput" type="TextEdit" parent="HContainerTwitch/VContainerTwitch"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+scroll_fit_content_height = true
+
+[node name="labelErro" type="Label" parent="HContainerTwitch/VContainerTwitch"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.183492, 1.24839e-07, 4.21144e-08, 1)
+horizontal_alignment = 1
+
+[node name="conectarButton" type="Button" parent="HContainerTwitch/VContainerTwitch"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Conectar"

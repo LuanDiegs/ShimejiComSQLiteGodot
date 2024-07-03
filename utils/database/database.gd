@@ -31,7 +31,6 @@ func tableExists(tableName: String):
 func getLastName():
 	database.query("SELECT nome FROM jogadores ORDER BY ID DESC LIMIT 1")
 	
-	print(database.query_result)
 	if(database.query_result.size() == 0):
 		return "erro"
 		

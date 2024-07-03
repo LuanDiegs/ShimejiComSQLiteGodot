@@ -16,13 +16,13 @@ const JUMP_VELOCITY = -400
 
 var nameShimeji: String
 
-
 func _ready():
 	global_position.y = -100
 	global_position.x = randi_range(0, get_viewport().size.x)
 	
 	insertNameOnShimeji()
 	timer_change_state.connect("timeout", randomizeState)
+	
 	
 func _physics_process(delta):
 	gravityShimeji(delta)
@@ -56,3 +56,12 @@ func shimejiDeath():
 	self.z_index = 100
 	velocity = Vector2(0, 0)
 	animations.play("death")
+
+
+func createShimeji(name: String):
+	var shimeji = Jogador.new(name)
+	
+	if(shimeji.createJogador()):
+		return true
+		
+	return false

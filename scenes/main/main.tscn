@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://6vpeguccwt3d"]
+[gd_scene load_steps=3 format=3 uid="uid://6vpeguccwt3d"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_6myh2"]
+[ext_resource type="PackedScene" uid="uid://bkuyq0v7nsax3" path="res://scenes/nodes/twitchIntegration/twichIntegration.tscn" id="2_waky8"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -14,10 +15,10 @@ script = ExtResource("1_6myh2")
 [node name="deatShimejiNotifications" type="ScrollContainer" parent="."]
 custom_minimum_size = Vector2(3.01, 0)
 layout_mode = 0
-offset_left = 29.0
-offset_top = 56.0
-offset_right = 473.0
-offset_bottom = 182.0
+offset_left = 826.0
+offset_top = 23.0
+offset_right = 1270.0
+offset_bottom = 149.0
 
 [node name="containerNotifications" type="VBoxContainer" parent="deatShimejiNotifications"]
 custom_minimum_size = Vector2(4.46, 0)
@@ -28,11 +29,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -143.0
-offset_top = 40.0
-offset_right = 143.0
-offset_bottom = 192.0
+offset_left = -613.0
+offset_top = 28.0
+offset_right = -323.0
+offset_bottom = 180.0
 grow_horizontal = 2
+scale = Vector2(0.718196, 0.718196)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -63,8 +65,16 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.183492, 1.24839e-07, 4.21144e-08, 1)
 horizontal_alignment = 1
 
-[node name="criarButton" type="Button" parent="VBoxContainer"]
+[node name="criarButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Inserir"
+
+[node name="ContainerTwitch" parent="." instance=ExtResource("2_waky8")]
+layout_mode = 1
+offset_left = -613.0
+offset_top = 164.0
+offset_right = -197.0
+offset_bottom = 316.0
+scale = Vector2(0.677208, 0.677208)
